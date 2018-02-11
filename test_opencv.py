@@ -7,6 +7,7 @@ import sys
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 
 from scipy import signal
 
@@ -52,6 +53,11 @@ def main():
   if bLoud:
     print "Image is:",sImg
   
+# test for output director
+  if not os.path.isdir("../out"):
+    print "Error, output path \"../out\" does not exist"
+    exit()
+
   imgIn = cv2.imread(sImg)
   if imgIn == None:
     print "Could not open image"
@@ -139,7 +145,9 @@ def main():
     plt.show()
     cv2.waitKey(0)
 
-  sOut = sImg + ".out.jpg"
+  h,t = os.path.split(sImg)
+
+  sOut = "../out/" + t + ".out.jpg"
 
   cv2.imwrite(sOut,imgCopy)
   if bLoud:
