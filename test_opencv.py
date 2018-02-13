@@ -18,6 +18,7 @@
 ##################################################################### 
 
 import sys
+import json
 
 import cv2
 import matplotlib.pyplot as plt
@@ -29,6 +30,11 @@ from scipy import signal
 ####################################################################
 # dumpJson(sFile, sOut, dX, dY, aOffsets)
 #
+def writeToJSONFile(path, fileName, data):
+    filePathNameWExt = './' + path + '/' + fileName + '.json'
+    with open(filePathNameWExt, 'w') as fp:
+        json.dump(data, fp)
+
 def dumpJson(sFile,sOut,dX,dY,aOffsets):
     print ("{\n"
         " file:\"%s\",\n"
@@ -187,6 +193,14 @@ def main():
     if bLoud:
         print peak
 
+    # Transform peak array to python list
+    offsetList = peak.tolist()
+
+    # Transform list to json
+    offset = json.dumps(offsetList)
+
+    # Writes json to output offset file
+    writeToJSONFile('../out', 'offset', offset)
     dumpJson(sImg, sOut,dX, dY,peak)
 
 #    print "at x,y", iX, " ", iY, " ", img[iY, iX]
