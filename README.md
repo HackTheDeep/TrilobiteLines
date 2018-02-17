@@ -1,17 +1,17 @@
 
-### American Museum of Natural History 'Hack the Deep' Hackathon
+# American Museum of Natural History 'Hack the Deep' Hackathon
 ## 10-11 Feb-2018
 
-# Simple tool to experiment with 'ridge' detection along back of trilobite
+### Simple tool to experiment with 'ridge' detection along back of trilobite
 
-1) read in image
-2) convert to grayscale
-3) apply some gamma correction (currently static value)
-4) apply multiple adjacent line profiles along Y in center
-5) average line profiles
-6) look for trough (minima) peaks
-7) draw output data onto lines in output image
-8) write out output image
+1. read in image
+2. convert to grayscale
+3. apply some gamma correction (currently static value)
+4. apply multiple adjacent line profiles along Y in center
+5. average line profiles
+6. look for trough (minima) peaks
+7. draw output data onto lines in output image
+8. write out output image
 
 The challenge suggested we used ImageJ; we actually just used imageJ to sample and test some very simple processing of images, then used some of those ideas via OpenCV, Numpy, et al inside of a python script. The general idea is: given a symmetrical trilobite image with long axis parallel and coincident with sampling axis, a 'strip sampled' profile along either side of the axis will give a (looking for) per segment (summed in dX) signal that will be noisy. Averaging the signal will give a cleaned, varying in dY sample of dark/light signal along this strip. Segments tend to be darker, so looking for lowest peaks will give initial rough set of 'crossings' constituting the candidates for segments. Finally, some dumb stats and cleaning up yields a set of candidate segments, and a count.
 
